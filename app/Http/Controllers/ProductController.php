@@ -39,7 +39,7 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'description' => 'required|max:1000',
-            'price' => 'required'
+            'image_url' => 'required'
         ]);
         $product = Product::create($validatedData);
         return redirect(route('products.show', ['product' => $product]));
@@ -64,7 +64,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('products.edit', ['product' => $product]);
     }
 
     /**
@@ -76,17 +76,28 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required|max:1000',
+            'image_url' => 'required'
+        ]);
+        $product->title = $validatedData['title'];
+        $product->description = $validatedData['description'];
+        $product->image_url = $validatedData['image_url'];
+        $product->save();
+        return redirect(route('products.show', compact('product')));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param Product $product
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect(route('products.index'));
     }
 }

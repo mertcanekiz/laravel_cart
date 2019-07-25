@@ -21,6 +21,4 @@ Route::get('/home', function() {
 
 Auth::routes();
 
-Route::resource('/products', 'ProductController')->only([
-    'index', 'show', 'create', 'store'
-]);
+Route::resource('/products', 'ProductController');

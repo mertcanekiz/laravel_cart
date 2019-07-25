@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -77,7 +77,48 @@
 
         <main class="py-4">
             @yield('content')
+            <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this product?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('[id^="delete-button-"]').click(function(event) {
+                $('#modal-delete').modal();
+                let form = $(this).parent().find('#delete-form');
+                $('#modal-delete').find('.modal-footer').html(`
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            ${form.html()}
+                            `)
+            });
+            $("body").on("submit", "form", function() {
+                $(this).submit(function() {
+                    return false;
+                });
+                return true;
+            });
+        })
+    </script>
 </body>
 </html>
