@@ -3,9 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <form action="{{route('products.store')}}" method="post">
                 @csrf
+                <h3>Product details</h3>
                 <div class="form-group">
                     <label for="title" class="col-form-label">Title</label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{old("title")}}" required autocomplete="title" autofocus>
@@ -33,9 +34,19 @@
                     </span>
                     @enderror
                 </div>
+                <div class="dropdown-divider"></div>
+                <h3>Options</h3>
+                <div id="options"></div>
+                <div class="dropdown-divider"></div>
+                <h3>Prices</h3>
+                <div id="prices"></div>
                 <button type="submit" class="btn btn-outline-primary">Submit</button>
             </form>
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+    <script src="{{asset('js/createProduct.js')}}"></script>
 @endsection

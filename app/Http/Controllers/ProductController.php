@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -98,6 +99,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+        Session::flash('message', 'Product deleted.');
         return redirect(route('products.index'));
     }
 }

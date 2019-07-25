@@ -76,6 +76,16 @@
         </nav>
 
         <main class="py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        @if(Session::has('message'))
+                            <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
             @yield('content')
             <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -99,6 +109,12 @@
     </div>
     <script>
         $(document).ready(function() {
+            setTimeout(function () {
+                if ($(".alert").is(":visible")){
+                    //you may add animate.css class for fancy fadeout
+                    $(".alert").fadeOut("fast");
+                }
+            }, 2000);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -120,5 +136,6 @@
             });
         })
     </script>
+    @yield('javascript')
 </body>
 </html>
