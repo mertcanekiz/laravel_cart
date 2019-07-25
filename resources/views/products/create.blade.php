@@ -37,10 +37,19 @@
                 <div class="dropdown-divider"></div>
                 <h3>Options</h3>
                 <div id="options"></div>
+                <button id="add-option-button" type="button" class="btn btn-outline-secondary btn-block">Add option</button>
                 <div class="dropdown-divider"></div>
                 <h3>Prices</h3>
                 <div id="prices"></div>
-                <button type="submit" class="btn btn-outline-primary">Submit</button>
+                <div class="form-row">
+                    <div class="col">
+                        <button id="add-price-button" type="button" class="btn btn-outline-secondary btn-block">Add price</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-block btn-outline-primary">Submit</button>
+                    </div>
+                </div>
+
             </form>
         </div>
     </div>
