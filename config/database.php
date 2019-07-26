@@ -103,6 +103,15 @@ return [
             ]
         ],
 
+        'mongodb_atlas' => [
+            'driver'   => 'mongodb',
+            'dsn'      => env('DB_DSN'),
+            'database' => env('DB_DATABASE'),
+            'options'  => [
+                'database' => 'admin'
+            ]
+        ]
+
     ],
 
     /*
