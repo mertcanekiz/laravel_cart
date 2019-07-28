@@ -5,11 +5,12 @@ function optionDetails(id, type) {
     if (type === 'color') {
         return /* html */`
             <div class="form-row">
+                <input type="hidden" name="option_type[]" value="color">
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="color">
+                    <input class="form-control form-control-sm" name="option_value[]" type="color">
                 </div>
                 <div class="col-10">
-                    <input class="form-control form-control-sm" type="text" name="option-${id}" id="option-${id}">
+                    <input class="form-control form-control-sm" type="text" id="option-${id}">
                 </div>
             </div>
         `;
@@ -17,14 +18,14 @@ function optionDetails(id, type) {
         return /* html */`
             <div class="form-row">
                 <div class="col-6">
-                    <select class="form-control form-control-sm" name="size_type_${id}" id="size-type-${id}">
+                    <select class="form-control form-control-sm" name="option_type[]" id="size-type-${id}">
                         <option value="clothes">Clothes</option>
                         <option value="shoes">Shoes</option>
                         <option value="custom">Custom</option>
                     </select>
                 </div>
                 <div class="col-6">
-                    <input class="form-control form-control-sm" type="text" name="option-${id}" id="option-${id}">
+                    <input class="form-control form-control-sm" type="text" name="option_value[]" id="option-${id}">
                 </div>
             </div>
         `;
@@ -37,7 +38,7 @@ function optionForm(id, type) {
     <h5>Option ${id+1}</h5>
         <div class="form-row">
             <div class="col-3 col-md-2">
-                <select class="custom-select custom-select-sm" name="option-type-${id}" id="option-type-${id}">
+                <select class="custom-select custom-select-sm" id="option-type-${id}">
                     <option value="color">Color</option>
                     <option value="size">Size</option>
                 </select>
@@ -59,31 +60,31 @@ function priceForm(id) {
             <div class="form-row">
                 <div class="col-6">
                     <label for="valid-from-${id}" class="col-form-label">Valid from</label>
-                    <input placeholder="Valid from" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="valid-from-${id}" name="valid_from_${id}">
+                    <input placeholder="Valid from" class="form-control form-control-sm" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="valid-from-${id}" name="valid_from[]">
                 </div>
                 <div class="col-6">
                     <label for="valid-to-${id}" class="col-form-label">Valid to</label>
-                    <input placeholder="Valid to" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="valid-to-${id}" name="valid_to_${id}">
+                    <input placeholder="Valid to" class="form-control form-control-sm" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="valid-to-${id}" name="valid_to[]">
                 </div>
             </div>
             <div class="form-row mt-2">
                 <div class="col-6">
                     <label for="currency-${id}" class="col-form-label">Currency</label>
-                    <input class="form-control" type="text" name="currency_${id}" id="currency-${id}" placeholder="Currency">
+                    <input class="form-control form-control-sm" type="text" name="currency[]" id="currency-${id}" placeholder="Currency">
                 </div>
                 <div class="col-6">
                     <label for="original-price-${id}" class="col-form-label">Original price</label>
-                    <input class="form-control" type="number" name="original_price_${id}" id="original-price-${id}" placeholder="Original price">
+                    <input class="form-control form-control-sm" type="number" name="original_price[]" id="original-price-${id}" placeholder="Original price">
                 </div>
             </div>
             <div class="form-row mt-2">
                 <div class="col-6">
                     <label for="discounted-price-${id}" class="col-form-label">Discounted price</label>
-                    <input class="form-control" type="number" name="discounted_price_${id}" id="discounted-price-${id}" placeholder="Discounted price">
+                    <input class="form-control form-control-sm" type="number" name="discounted_price[]" id="discounted-price-${id}" placeholder="Discounted price">
                 </div>
                 <div class="col-6">
                     <label for="discount-rate-${id}" class="col-form-label">Discount rate</label>
-                    <input class="form-control" type="number" name="discount_rate_${id}" id="discount-rate-${id}" placeholder="Discount rate">
+                    <input class="form-control form-control-sm" type="number" name="discount_rate[]" id="discount-rate-${id}" placeholder="Discount rate">
                 </div>
             </div>
             <div class="form-row mt-2">
@@ -96,7 +97,9 @@ function priceForm(id) {
             </div>
             <div class="form-row mt-2">
                 <div class="col-6">
-                    <select class="form-control" name="price_options_${id}" id="price-options-${id}" multiple>
+                    <select class="form-control" name="price_options[${id}][]" id="price-options-${id}" multiple>
+                        <option value="blue">Blue</option>
+                        <option value="small">Small</option>
                     </select>
                 </div>
                 <div class="col-6">

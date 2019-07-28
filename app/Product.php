@@ -11,6 +11,6 @@ class Product extends Eloquent
     ];
 
     public function prices() {
-        return $this->hasMany('App\Price');
+        return $this->embedsMany('App\Price');
     }
 }
