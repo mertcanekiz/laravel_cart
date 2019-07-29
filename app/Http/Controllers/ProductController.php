@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Response;
 
 class ProductController extends Controller
 {
@@ -110,12 +111,8 @@ class ProductController extends Controller
             }
             return redirect(route('products.show', compact('product')));
         } else {
-            return JsonResponse::create(['fail' => 'true']);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
-
-        
-        $product = Product::create($validatedData);
-        return redirect(route('products.show', ['product' => $product]));
     }
 
     /**
